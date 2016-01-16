@@ -181,7 +181,7 @@ class MusicBot(discord.Client):
             if message.author.id not in self.vote_next and message.author in self.voice.channel.voice_members:
                 self.vote_next.append(message.author.id)
                 yield from self.send_message(self.bound_channel, "{} voted to skip the current song.".format(message.author))
-            if len(self.vote_next) >= 2 or len(self.vote_next) >= ((len(self.voice.channel.voice_members) - 1) / 2):
+            if len(self.vote_next) >= 2 or len(self.voice.channel.voice_members) == 1:
                 self.player.stop()
                 yield from self.send_message(self.bound_channel, "Minimum number of votes achieved! Skipping song.")
 
